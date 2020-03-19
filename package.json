@@ -1,6 +1,7 @@
 {
   "name": "domwaiter",
   "description": "A well-behaved URL scraper that brings you delicious DOM objects",
+  "version": "0.0.0-development",
   "repository": "https://github.com/zeke/domwaiter",
   "main": "index.js",
   "scripts": {
@@ -15,6 +16,7 @@
   "devDependencies": {
     "jest": "^25.1.0",
     "nock": "^12.0.3",
+    "semantic-release": "^17.0.4",
     "standard": "^14.3.3"
   },
   "standard": {
