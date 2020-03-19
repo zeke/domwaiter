@@ -1,0 +1,25 @@
+{
+  "name": "domwaiter",
+  "description": "A well-behaved URL scraper that brings you delicious DOM objects",
+  "repository": "https://github.com/zeke/domwaiter",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest test.js && standard",
+    "lint": "standard --fix"
+  },
+  "dependencies": {
+    "bottleneck": "^2.19.5",
+    "cheerio": "^1.0.0-rc.3",
+    "got": "^10.6.0"
+  },
+  "devDependencies": {
+    "jest": "^25.1.0",
+    "nock": "^12.0.3",
+    "standard": "^14.3.3"
+  },
+  "standard": {
+    "env": {
+      "jest": "true"
+    }
+  }
+}
