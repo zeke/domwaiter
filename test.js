@@ -9,7 +9,7 @@ describe('domwaiter', () => {
     expect(typeof domwaiter).toBe('function')
   })
 
-  test('emits events', (done) => {
+  test('emits `page` and `done` events', (done) => {
     const mock = nock('https://example.com')
       .get('/foo')
       .reply(200, '<html><title>Hello, foo</title></html>')
@@ -40,6 +40,25 @@ describe('domwaiter', () => {
       .on('error', (err) => {
         console.error('domwaiter error')
         console.error(err)
+      })
+  })
+
+  test('emits a `beforePageLoad` event with page object', (done) => {
+    const mock = nock('https://example.com')
+      .get('/foo')
+      .reply(200)
+
+    const pages = [
+      { url: 'https://example.com/foo' }
+    ]
+
+    const waiter = domwaiter(pages, { minTime: 10 })
+
+    waiter
+      .on('beforePageLoad', (page) => {
+        expect(mock.isDone())
+        expect(page && page.url)
+        done()
       })
   })
 
