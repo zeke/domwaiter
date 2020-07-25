@@ -31,6 +31,8 @@ module.exports = function domwaiter (pages, opts = {}) {
 }
 
 async function getPage (page, emitter, opts) {
+  emitter.emit('beforePageLoad', page)
+
   if (opts.json) {
     try {
       const json = await got(page.url).json()

@@ -58,7 +58,8 @@ This module exports a single function `domwaiter`:
 
 The `domwaiter` function returns an event emitter which emits the following events:
 
-- `page` - Emitted as each page has been requested and parsed. Returns an object which is a shallow clone of the original `page` object you provided, but with two added properties:
+- `beforePageLoad` - Emitted with `page` object for any optional prehandling you want to do, e.g. setting up a request timer.
+- `page` - Emitted after the page has been requested and the response is parsed. Returns an object which is a shallow clone of the original `page` object you provided, but with two added properties:
   - `body`: the raw HTTP response body text
   - `$`: The body parsed into a jQuery-like [cheerio](https://ghub.io/cheerio) DOM object.
 - `error` - Emitted when an error occurs fetching a URL
