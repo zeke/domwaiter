@@ -10,7 +10,7 @@ Do you have a large collection of URLs you want to scrape? Scraping one page at 
 - Event-emitting API to keep a low memory footprint
 - Supports fetching JSON too (instead of HTML DOM)
 - Rate limiting powered by [bottleneck](https://ghub.io/bottleneck)
-- DOM parsing powered by [cheerio](https://ghub.io/cheerio)
+- DOM parsing powered by [cheerio](https://ghub.io/cheerio) (optional; can be disabled)
 - HTTP requests powered by [got](https://ghub.io/got)
 
 ## Installation
@@ -50,7 +50,8 @@ This module exports a single function `domwaiter`:
 
 - `pages` Array (required) - Each item in the array must have a `url` property with a fully-qualified HTTP(S) URL. These object can optionally have other properties, which will be included in the emitted `page` events. See below.
 - `opts` Object (optional)
-  - `json` Boolean - Set to `true` if you're fetching JSON instead of HTML. If `true`, a `json` property will be present on each emitted `page` object (and the `$` and `body` properties will NOT be present).
+  - `parseDOM` Boolean - Defaults to `true`. Set to `false` if you don't need the parsed `page.$` DOM object. Disabling DOM parsing will boost performance.
+  - `json` Boolean - Defaults to `false`. Set to `true` if you're fetching JSON instead of HTML. If `true`, a `json` property will be present on each emitted `page` object (and the `$` and `body` properties will NOT be present).
   - `maxConcurrent` Number - How many jobs can be executing at the same time. Defaults to `5`. This option is passed to the underlying [bottleneck](https://ghub.io/bottleneck#docs) instance.
   - `minTime`: Number - How long to wait after launching a job before launching another one. Defaults to `500` (milliseconds). This option is passed to the underlying [bottleneck](https://ghub.io/bottleneck#docs) instance.
 

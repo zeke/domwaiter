@@ -7,6 +7,7 @@ module.exports = function domwaiter (pages, opts = {}) {
   const emitter = new EventEmitter()
 
   const defaults = {
+    parseDOM: true,
     json: false,
     maxConcurrent: 5,
     minTime: 500
@@ -44,8 +45,8 @@ async function getPage (page, emitter, opts) {
   } else {
     try {
       const body = (await got(page.url)).body
-      const $ = cheerio.load(body)
-      const pageCopy = Object.assign({}, page, { body, $ })
+      const pageCopy = Object.assign({}, page, { body })
+      if (opts.parseDOM) pageCopy.$ = cheerio.load(body)
       emitter.emit('page', pageCopy)
     } catch (err) {
       emitter.emit('error', err)
