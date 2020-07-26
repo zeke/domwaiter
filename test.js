@@ -92,6 +92,35 @@ describe('domwaiter', () => {
       })
   })
 
+  test('allows `parseDOM` option to skip cheerio parsing', (done) => {
+    const mock = nock('https://example.com')
+      .get('/foo')
+      .reply(200, '<html><title>Hello, foo</title></html>')
+
+    const pages = [
+      { url: 'https://example.com/foo' }
+    ]
+
+    const waiter = domwaiter(pages, { minTime: 10, parseDOM: false })
+    const results = []
+
+    waiter
+      .on('page', (page) => {
+        results.push(page)
+      })
+      .on('done', () => {
+        expect(mock.isDone()).toBe(true)
+        expect(results.length).toBe(1)
+        expect(results[0].body).toContain('Hello, foo')
+        expect(results[0].$).toBe(undefined)
+        done()
+      })
+      .on('error', (err) => {
+        console.error('domwaiter error')
+        console.error(err)
+      })
+  })
+
   test('supports json responses', (done) => {
     const mock = nock('https://example.com')
       .get('/foo')
