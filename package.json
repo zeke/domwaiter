@@ -1,7 +1,7 @@
 {
   "name": "domwaiter",
   "description": "A well-behaved URL scraper that brings you delicious DOM objects",
-  "version": "0.0.0-development",
+  "version": "0.0.0",
   "repository": "https://github.com/zeke/domwaiter",
   "main": "index.js",
   "scripts": {
